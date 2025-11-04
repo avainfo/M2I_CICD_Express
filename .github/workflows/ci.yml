@@ -1,0 +1,23 @@
+name: CI - Api Express
+
+on:
+  push:
+    branches:
+      ["master", "dev"]
+  pull_request:
+    branches:
+      ["master", "dev"]
+
+jobs:
+  test:
+    name: Api Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+      - name: Install dependencies
+        run: "npm install"
+      - name: Test
+        run: "npm test"
