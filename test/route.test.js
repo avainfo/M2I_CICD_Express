@@ -9,7 +9,7 @@ describe('Check endpoint /', () => {
     });
     it('should return started', async () => {
         const res = await request(app)
-            .get("/index");
+            .get("/");
         expect(res.body).toEqual({"status": "started"})
     });
 });
