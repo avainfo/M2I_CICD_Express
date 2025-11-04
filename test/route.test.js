@@ -1,24 +1,24 @@
-describe('Check endpoint /', () => {
-    it('should return 200', async () => {
-        let req = await fetch("http://localhost:3000/");
-        expect(req.status).toEqual(200);
-    });
+const app = require("../app.js");
+const request = require("supertest");
 
-    it('should return data', async () => {
-        let req = await fetch("http://localhost:3000/");
-        let body = await req.text();
-        expect(body).toContain("Welcome to Express");
+describe('Check endpoint /', () => {
+    it('should return 200', (done) => {
+        request(app)
+            .get("/")
+            .expect(200, done);
     });
 });
 
 describe('Check endpoint /users', () => {
-    it('should return 200', async () => {
-        let req = await fetch("http://localhost:3000/users");
-        expect(req.status).toEqual(200);
+    it('should return 200', (done) => {
+        request(app)
+            .get("/users")
+            .expect(200, done);
     });
+
     it('should return user data', async () => {
-        let req = await fetch("http://localhost:3000/users");
-        let body = await req.json();
-        expect(await body).toEqual({"name": "Antonin", "age": 21});
+        const res = await request(app)
+            .get("/users");
+        expect(res.body).toEqual({"name": "Antonin", "age": 21});
     });
 });
