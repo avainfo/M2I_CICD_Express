@@ -7,6 +7,11 @@ describe('Check endpoint /', () => {
             .get("/")
             .expect(200, done);
     });
+    it('should return started', async () => {
+        const res = await request(app)
+            .get("/index");
+        expect(res.body).toEqual({"status": "started"})
+    });
 });
 
 describe('Check endpoint /users', () => {
